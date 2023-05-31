@@ -32,3 +32,23 @@ User.posts = relationship("Post", back_populates="author")
 User.comments = relationship("Comment", back_populates="author")
 
 Post.comments = relationship("Comment", back_populates="post")
+
+class BlogPost(Base):
+    __tablename__ = "blog_posts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, index=True)
+    content = Column(String)
+    author = Column(String)
+    comments = relationship("Comment", back_populates="blog_post")
+
+
+class Comment(Base):
+    __tablename__ = "comments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    content = Column(String)
+    author = Column(String)
+    blog_post_id = Column(Integer, ForeignKey("blog_posts.id"))
+    blog_post = relationship("BlogPost", back_populates="comments")
+
