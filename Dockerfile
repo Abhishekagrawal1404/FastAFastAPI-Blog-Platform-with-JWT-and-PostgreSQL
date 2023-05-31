@@ -18,3 +18,7 @@ EXPOSE 8000
 
 # Define the command to run the application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
+docker build -t my-fastapi-app .
+docker run -d -p 8000:8000 my-fastapi-app
